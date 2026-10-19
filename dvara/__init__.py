@@ -79,8 +79,6 @@ class Plugin(Base):
     placeholder = "Search apps…   (Shift+Enter runs what you type)"
     preview = True
     preview_width = 340
-    width = 900
-    height = 520
     hints = [Hint("Enter", "open"), Hint("Ctrl+Enter", "action"), Hint("Shift+Enter", "run command")]
 
     def __init__(self, vyom, conf):

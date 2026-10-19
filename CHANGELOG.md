@@ -2,6 +2,11 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.1.3 -- 2026-10-19
+
+- Opens at Vyom's shared panel size (Vyom 0.2.5) like every other tool:
+  its own width/height are gone.
+
 ## v0.1.2 -- 2026-10-19
 
 - Keys are spelled out (Ctrl+Enter, Shift+Enter, Backspace) instead of symbols
