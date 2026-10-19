@@ -78,7 +78,9 @@ class Plugin(Base):
     name, title, icon, color = "dvara", "Apps", "\U000f003b", "mauve"
     placeholder = "Search apps…   (⇧↵ runs what you type)"
     preview = True
-    preview_width = 300
+    preview_width = 340
+    width = 900
+    height = 520
     hints = [Hint("↵", "open"), Hint("⌃↵", "action"), Hint("⇧↵", "run command")]
 
     def __init__(self, vyom, conf):

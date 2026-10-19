@@ -2,6 +2,11 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.1.1 -- 2026-10-19
+
+- Wider: 900 x 520 (before Vyom's scale), with a 340 px preview, so long app
+  names and descriptions fit.
+
 ## v0.1.0 -- 2026-10-19
 
 - First release, as its own repository: the app launcher. Replaces wofi's app launcher (`wofi --show drun`) in Vayu.
