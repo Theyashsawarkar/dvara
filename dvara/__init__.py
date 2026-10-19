@@ -76,12 +76,12 @@ class App:
 
 class Plugin(Base):
     name, title, icon, color = "dvara", "Apps", "\U000f003b", "mauve"
-    placeholder = "Search apps…   (⇧↵ runs what you type)"
+    placeholder = "Search apps…   (Shift+Enter runs what you type)"
     preview = True
     preview_width = 340
     width = 900
     height = 520
-    hints = [Hint("↵", "open"), Hint("⌃↵", "action"), Hint("⇧↵", "run command")]
+    hints = [Hint("Enter", "open"), Hint("Ctrl+Enter", "action"), Hint("Shift+Enter", "run command")]
 
     def __init__(self, vyom, conf):
         super().__init__(vyom, conf)
@@ -131,7 +131,7 @@ class Plugin(Base):
         rows = [self.row(a) for _, a in scored]
         rows.append(Section("Run"))
         rows.append(Row(f"Run “{q}” in a terminal", self.terminal, icon="", color="green",
-                        meta="⇧↵", data=("term", q)))
+                        meta="Shift+Enter", data=("term", q)))
         rows.append(Row(f"Run “{q}”", "as a command, without a terminal", icon="\U000f0e1e", color="peach",
                         data=("cmd", q)))
         return rows
@@ -165,7 +165,7 @@ class Plugin(Base):
         btns = ui.vbox(spacing=6)
         btns.append(ui.button("Open", lambda: self.launch(app), "primary", "\U000f040a"))
         for i, (aid, aname) in enumerate(app.actions[:6], 1):
-            btns.append(ui.button(f"{aname}   ⌃{i}", lambda a=aid: self.launch(app, a)))
+            btns.append(ui.button(f"{aname}   Ctrl+{i}", lambda a=aid: self.launch(app, a)))
         parts.append(btns)
         return ui.vbox(*parts, spacing=12)
 

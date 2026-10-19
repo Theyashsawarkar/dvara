@@ -2,6 +2,11 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.1.2 -- 2026-10-19
+
+- Keys are spelled out (Ctrl+Enter, Shift+Enter, Backspace) instead of symbols
+  (⌃↵, ⇧↵, ⌫) in the footer and on rows and buttons.
+
 ## v0.1.1 -- 2026-10-19
 
 - Wider: 900 x 520 (before Vyom's scale), with a 340 px preview, so long app
