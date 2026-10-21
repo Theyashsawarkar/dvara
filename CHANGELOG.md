@@ -2,6 +2,14 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.1.4 -- 2026-10-21
+
+- Documentation for open source: a logo and banner, a full README (features,
+  install, usage, configuration, troubleshooting, the whole Vyom family),
+  CONTRIBUTING, SECURITY and CODE_OF_CONDUCT, issue and pull request
+  templates, and CI (compiles, checks plugin.toml and that every key is
+  documented).
+
 ## v0.1.3 -- 2026-10-19
 
 - Opens at Vyom's shared panel size (Vyom 0.2.5) like every other tool:
