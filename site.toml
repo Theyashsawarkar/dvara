@@ -1,0 +1,8 @@
+# The project website (docs/, GitHub Pages): built by scripts/build-site.py
+name = "dvara"
+sanskrit = "द्वार"
+meaning = "gateway"
+tagline = "App launcher: your most-used apps first, app actions, running windows, run a command."
+color = "mauve"
+kind = "a Vyom tool"
+logo = "assets/logo.svg"

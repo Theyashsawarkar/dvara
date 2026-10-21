@@ -2,6 +2,12 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.1.5 -- 2026-10-21
+
+- A website (GitHub Pages, https://theyashsawarkar.github.io/dvara/): the README as a home page, the
+  changelog, and architecture decision records (`docs/adr/`), built from these files by
+  `scripts/build-site.py`; CI checks the site is up to date.
+
 ## v0.1.4 -- 2026-10-21
 
 - Documentation for open source: a logo and banner, a full README (features,
