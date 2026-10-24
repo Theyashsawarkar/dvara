@@ -1,7 +1,7 @@
 name = "dvara"
 title = "Apps"
 description = "App launcher: your most-used apps first, app actions, running windows, run a command."
-version = "0.1.5"
+version = "0.1.6"
 vyom = "0.2.5"
 icon = "󰀻"
 color = "mauve"

@@ -6,14 +6,13 @@ come first. The preview shows what the app is, its windows that are
 already open, and its own actions (New window, Private window...).
 """
 import json
+import logging
 import os
-import shlex
 import shutil
-import subprocess
 import time
 
 import gi
-from gi.repository import Gdk, Gio, Gtk
+from gi.repository import Gdk, Gio
 
 try:  # GLib >= 2.86 moved DesktopAppInfo to GioUnix
     gi.require_version("GioUnix", "2.0")
@@ -31,6 +30,8 @@ from vyom import Plugin as Base
 # keybind: Vyom/apps | Ctrl+1..9 | Run that numbered action of the selected app
 
 STATE = "dvara-usage"
+
+log = logging.getLogger("vyom.dvara")
 
 
 def windows():
@@ -181,6 +182,7 @@ class Plugin(Base):
             else:
                 app.info.launch([], ctx)
         except Exception as e:
+            log.exception("couldn't launch %s (action %r)", app.name, action)
             util.notify("Couldn't open " + app.name, str(e), icon="dialog-error")
         self.close()
 

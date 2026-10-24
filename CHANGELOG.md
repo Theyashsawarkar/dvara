@@ -2,6 +2,12 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.1.6 -- 2026-10-24
+
+- An app that fails to launch is logged with its traceback, as well as the notification. Unused imports removed.
+- Logs are in the journal (Vyom 0.3.2): the README, CONTRIBUTING and the bug
+  report form say `journalctl --user -u vyom -u vyom-daemon -b`.
+
 ## v0.1.5 -- 2026-10-21
 
 - A website (GitHub Pages, https://theyashsawarkar.github.io/dvara/): the README as a home page, the
