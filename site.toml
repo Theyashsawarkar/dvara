@@ -6,3 +6,6 @@ tagline = "App launcher: your most-used apps first, app actions, running windows
 color = "mauve"
 kind = "a Vyom tool"
 logo = "assets/logo.svg"
+shloka = "हिरण्मयेन पात्रेण सत्यस्यापिहितं मुखम् ।\nतत्त्वं पूषन्नपावृणु सत्यधर्माय दृष्टये ॥"
+shloka_meaning = "The face of truth is covered by a golden lid; open it, so that I may see."
+shloka_source = "Īśa Upaniṣad 15"

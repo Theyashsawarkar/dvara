@@ -6,6 +6,15 @@
   </picture>
 </p>
 
+<!-- identity -->
+<p align="center">
+  <b>हिरण्मयेन पात्रेण सत्यस्यापिहितं मुखम् ।<br>
+  तत्त्वं पूषन्नपावृणु सत्यधर्माय दृष्टये ॥</b><br>
+  <i>The face of truth is covered by a golden lid; open it, so that I may see.</i><br>
+  <sub>Īśa Upaniṣad 15</sub>
+</p>
+<!-- /identity -->
+
 <p align="center">
   <b>App launcher: your most-used apps first, app actions, running windows, run a command.</b><br>
   The app launcher. A tool for <a href="https://github.com/Theyashsawarkar/vyom">Vyom</a>, keyboard-driven panels for Wayland.
