@@ -2,8 +2,9 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
-## Unreleased
+## v0.1.7 -- 2026-11-06
 
+- **Alt+1..9 runs an app's numbered action** (New window, Private window…): Ctrl+1..9 now switches a tool's tabs in every Vyom tool.
 - Every corner is rounded: the website's callouts.
 - A logo and a shloka at the top of the README and the website: every Vayu tool has them now.
 

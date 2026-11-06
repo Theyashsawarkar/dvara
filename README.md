@@ -53,7 +53,7 @@ dvara is the app launcher for [Vyom](https://github.com/Theyashsawarkar/vyom): o
 - Every installed app (.desktop files), with its real icon.
 - Ranked by **how often and how recently you open each app**; with an empty search, your frequent apps come first, then everything A–Z.
 - Matches the name, the generic name ("Web browser"), keywords and the command, typos and all.
-- The preview shows what the app is, **how many of its windows are already open**, and its own actions (New window, Private window…), each on `Ctrl+1..9`.
+- The preview shows what the app is, **how many of its windows are already open**, and its own actions (New window, Private window…), each on `Alt+1..9`.
 - `Shift+Enter` runs whatever you typed as a command in a terminal; a row below the results runs it without one.
 - Keyboard first: every action has a key, shown in the footer; the mouse works too.
 - Never freezes the panel: slow commands run in the background.
@@ -95,10 +95,10 @@ Open it with `vyom dvara` (or your key). Type to search; the footer always shows
 | `Enter` | Open the selected app |
 | `Ctrl+Enter` | Run the selected app's first action (e.g. a new window) |
 | `Shift+Enter` | Run what you typed as a command (in a terminal) |
-| `Ctrl+1..9` | Run that numbered action of the selected app |
+| `Alt+1..9` | Run that numbered action of the selected app |
 | `Esc` | Close the panel |
 
-Every Vyom panel also has `Up`/`Down` (or `Ctrl+K`/`Ctrl+J`) to move, `Page Up`/`Page Down` to jump and `Tab` to switch to the next tool.
+Every Vyom panel also has `Up`/`Down` (or `Ctrl+K`/`Ctrl+J`) to move and `Page Up`/`Page Down` to jump. Each tool opens from its own key.
 
 ## Configuration
 

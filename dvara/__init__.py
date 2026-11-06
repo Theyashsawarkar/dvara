@@ -27,7 +27,7 @@ from vyom import Plugin as Base
 # keybind: Vyom/apps | Enter | Open the selected app
 # keybind: Vyom/apps | Ctrl+Enter | Run the selected app's first action (e.g. a new window)
 # keybind: Vyom/apps | Shift+Enter | Run what you typed as a command (in a terminal)
-# keybind: Vyom/apps | Ctrl+1..9 | Run that numbered action of the selected app
+# keybind: Vyom/apps | Alt+1..9 | Run that numbered action of the selected app
 
 STATE = "dvara-usage"
 
@@ -164,7 +164,7 @@ class Plugin(Base):
         btns = ui.vbox(spacing=6)
         btns.append(ui.button("Open", lambda: self.launch(app), "primary", "\U000f040a"))
         for i, (aid, aname) in enumerate(app.actions[:6], 1):
-            btns.append(ui.button(f"{aname}   Ctrl+{i}", lambda a=aid: self.launch(app, a)))
+            btns.append(ui.button(f"{aname}   Alt+{i}", lambda a=aid: self.launch(app, a)))
         parts.append(btns)
         return ui.vbox(*parts, spacing=12)
 
@@ -209,7 +209,8 @@ class Plugin(Base):
         return False
 
     def key(self, name, row, mods):
-        if "ctrl" in mods and name.isdigit() and name != "0" and row is not None and isinstance(row.data, App):
+        # Alt: Ctrl+1..9 switch a tool's tabs in every Vyom tool
+        if mods == {"alt"} and name.isdigit() and name != "0" and row is not None and isinstance(row.data, App):
             i = int(name) - 1
             if i < len(row.data.actions):
                 self.launch(row.data, row.data.actions[i][0])
