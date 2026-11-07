@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>dvara · App launcher: your most-used apps first, app actions, running windows, run a command.</title>
-<meta name="description" content="App launcher: your most-used apps first, app actions, running windows, run a command.">
-<meta property="og:title" content="dvara · App launcher: your most-used apps first, app actions, running windows, run a command.">
-<meta property="og:description" content="App launcher: your most-used apps first, app actions, running windows, run a command.">
+<title>dvara · App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command.</title>
+<meta name="description" content="App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command.">
+<meta property="og:title" content="dvara · App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command.">
+<meta property="og:description" content="App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command.">
 <meta name="theme-color" content="#11111b">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,23 +22,23 @@
 <div class="eyebrow">a Vyom tool</div>
 <h1>dvara</h1>
 <div class="sa">द्वार <span>· “gateway”</span></div>
-<p class="lead">App launcher: your most-used apps first, app actions, running windows, run a command.</p>
+<p class="lead">App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command.</p>
 <figure class="shloka"><p lang="sa">हिरण्मयेन पात्रेण सत्यस्यापिहितं मुखम् ।<br>तत्त्वं पूषन्नपावृणु सत्यधर्माय दृष्टये ॥</p><figcaption>The face of truth is covered by a golden lid; open it, so that I may see. <cite>Īśa Upaniṣad 15</cite></figcaption></figure>
 <div class="cta"><a class="btn primary" href="#install">Install</a><a class="btn" href="https://github.com/Theyashsawarkar/dvara">GitHub ↗</a>
-<a class="btn" href="changelog.html">What's new in v0.1.7</a></div>
-<div class="meta"><span><b>v0.1.7</b> latest</span><span><b>8</b> releases</span><span><b>3</b> decisions recorded</span><span><b>MIT</b> license</span></div>
+<a class="btn" href="changelog.html">What's new in v0.2.0</a></div>
+<div class="meta"><span><b>v0.2.0</b> latest</span><span><b>9</b> releases</span><span><b>3</b> decisions recorded</span><span><b>MIT</b> license</span></div>
 </div><img class="logo" src="assets/logo.svg" alt="dvara logo"></div></section>
 <div class="wrap"><aside class="toc"><b>On this page</b><a class="l2" href="#features">Features</a><a class="l2" href="#install">Install</a><a class="l3" href="#requirements">Requirements</a><a class="l3" href="#install">Install</a><a class="l3" href="#update-and-uninstall">Update and uninstall</a><a class="l2" href="#usage">Usage</a><a class="l2" href="#configuration">Configuration</a><a class="l2" href="#troubleshooting">Troubleshooting</a><a class="l2" href="#the-vyom-family">The Vyom family</a><a class="l2" href="#contributing">Contributing</a><a class="l2" href="#license">License</a></aside><article>
 <p align="center">
-  <img alt="dvara: apps panel" src="assets/screenshots/dvara.png" width="100%">
+  <img alt="dvara: searching fir, with the matched letters of Firefox, Firewall and Refinery highlighted, Firefox marked Running · 2 windows, a Run as a command row, and the preview with Switch to it, its two windows and workspaces, and its actions on Alt+1 and Alt+2" src="assets/screenshots/dvara.png" width="100%">
 </p>
 <blockquote><p><em>Dvara</em> (द्वार) is Sanskrit for "gateway": the doorway every app is opened through.</p></blockquote>
 <p>dvara is the app launcher for <a href="https://github.com/Theyashsawarkar/vyom">Vyom</a>: one keyboard-driven panel that opens instantly, with live data, a preview and a key for everything. It runs on any compositor with the layer-shell protocol (sway, Hyprland, river, niri, Wayfire, labwc…). In <a href="https://github.com/Theyashsawarkar/vayu">Vayu</a>, the desktop it was built for, it replaces wofi's app launcher (<code>wofi --show drun</code>).</p>
 <h2 id="features"><a class="anchor" href="#features">#</a>Features</h2>
-<ul><li>Every installed app (.desktop files), with its real icon.</li><li>Ranked by <strong>how often and how recently you open each app</strong>; with an empty search, your frequent apps come first, then everything A–Z.</li><li>Matches the name, the generic name ("Web browser"), keywords and the command, typos and all.</li><li>The preview shows what the app is, <strong>how many of its windows are already open</strong>, and its own actions (New window, Private window…), each on <code>Alt+1..9</code>.</li><li><code>Shift+Enter</code> runs whatever you typed as a command in a terminal; a row below the results runs it without one.</li><li>Keyboard first: every action has a key, shown in the footer; the mouse works too.</li><li>Never freezes the panel: slow commands run in the background.</li></ul>
+<ul><li>Every installed app (.desktop files), with its real icon.</li><li>Ranked by <strong>how often and how recently you open each app</strong>. With an empty search, <strong>a dock of your 8 most-used apps</strong> as big icons sits above the list (<code>1..8</code> opens one), then what's running, then everything A–Z.</li><li>Matches the name, the generic name ("Web browser"), keywords and the command, typos and all; <strong>the letters that matched are highlighted</strong> in peach, so you can see why "frf" found Firefox.</li><li><strong>Running apps say so</strong> ("Running · 2 windows", in green) and <code>Enter</code> switches to them instead of opening another (on sway and i3); <code>Ctrl+Enter</code> opens a new window.</li><li>The preview shows the app's <strong>open windows with their workspace</strong> (click one to switch to it), how often you've opened it, and its own actions (New window, Private window…) as buttons, each on <code>Alt+1..9</code>.</li><li><code>Shift+Enter</code> runs whatever you typed as a command in a terminal; a row below the results runs it without one.</li><li>Keyboard first: every action has a key, shown in the footer; the mouse works too.</li><li>Never freezes the panel: slow commands run in the background.</li></ul>
 <h2 id="install"><a class="anchor" href="#install">#</a>Install</h2>
 <h3 id="requirements"><a class="anchor" href="#requirements">#</a>Requirements</h3>
-<ul><li><a href="https://github.com/Theyashsawarkar/vyom">Vyom</a> 0.2.5 or newer (Python 3.11+, PyGObject, GTK 4, <a href="https://github.com/wmww/gtk4-layer-shell">gtk4-layer-shell</a>, a Nerd Font)</li><li>optional: swaymsg (open-window counts)</li></ul>
+<ul><li><a href="https://github.com/Theyashsawarkar/vyom">Vyom</a> 0.6.0 or newer (Python 3.11+, PyGObject, GTK 4, <a href="https://github.com/wmww/gtk4-layer-shell">gtk4-layer-shell</a>, a Nerd Font)</li><li>optional: swaymsg (open-window counts)</li></ul>
 <h3 id="install"><a class="anchor" href="#install">#</a>Install</h3>
 <pre class="code" data-lang="sh"><code>git clone https://github.com/Theyashsawarkar/dvara ~/.local/share/vyom/plugins/dvara
 vyom reload           # pick it up (or log out and in)
@@ -50,7 +50,7 @@ vyom dvara            # open it; run it again to close</code></pre>
 rm -rf ~/.local/share/vyom/plugins/dvara &amp;&amp; vyom reload          # uninstall</code></pre>
 <h2 id="usage"><a class="anchor" href="#usage">#</a>Usage</h2>
 <p>Open it with <code>vyom dvara</code> (or your key). Type to search; the footer always shows the keys for what's selected.</p>
-<div class="table"><table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td><code>Enter</code></td><td>Open the selected app</td></tr><tr><td><code>Ctrl+Enter</code></td><td>Run the selected app's first action (e.g. a new window)</td></tr><tr><td><code>Shift+Enter</code></td><td>Run what you typed as a command (in a terminal)</td></tr><tr><td><code>Alt+1..9</code></td><td>Run that numbered action of the selected app</td></tr><tr><td><code>Esc</code></td><td>Close the panel</td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td><code>Enter</code></td><td>Open the selected app (switches to it when it's already running)</td></tr><tr><td><code>Ctrl+Enter</code></td><td>Open a new window of the selected app</td></tr><tr><td><code>Shift+Enter</code></td><td>Run what you typed as a command (in a terminal)</td></tr><tr><td><code>Alt+1..9</code></td><td>Run that numbered action of the selected app</td></tr><tr><td><code>1..8</code></td><td>Open that app from the dock (empty search box only; not when an app's name starts with that digit)</td></tr><tr><td><code>Esc</code></td><td>Close the panel</td></tr></tbody></table></div>
 <p>Every Vyom panel also has <code>Up</code>/<code>Down</code> (or <code>Ctrl+K</code>/<code>Ctrl+J</code>) to move and <code>Page Up</code>/<code>Page Down</code> to jump. Each tool opens from its own key.</p>
 <h2 id="configuration"><a class="anchor" href="#configuration">#</a>Configuration</h2>
 <p>Everything is optional, in <code>~/.config/vyom/config.toml</code> under <code>[plugin.dvara]</code>:</p>

@@ -2,6 +2,21 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.2.0 -- 2026-11-07
+
+- **A dock of your 8 most-used apps** as big icons above the list when the search box is empty; `1..8`
+  opens one (unless an app's name starts with that digit, so you can still search for it). Running
+  apps come next, then everything A–Z.
+- **The letters that matched are highlighted** (peach and underlined), so you can see why a search
+  found an app.
+- **Running apps say so** in green ("Running · 2 windows"), and **Enter switches to them** instead of
+  opening another (sway / i3). `Ctrl+Enter` now opens a new window (it used to run the first action:
+  that's `Alt+1`).
+- The preview shows the app's **open windows with their workspace** (click one to switch to it), how
+  often and when you last opened it, and its actions as buttons with their keys (`Alt+1..9`).
+- "Run as a command" (`Shift+Enter`) and "without a terminal" rows under the results, with a preview.
+- Blue, like the redesign's Apps panel. Needs Vyom 0.6.0.
+
 ## v0.1.7 -- 2026-11-06
 
 - **Alt+1..9 runs an app's numbered action** (New window, Private window…): Ctrl+1..9 now switches a tool's tabs in every Vyom tool.

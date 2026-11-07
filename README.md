@@ -16,7 +16,7 @@
 <!-- /identity -->
 
 <p align="center">
-  <b>App launcher: your most-used apps first, app actions, running windows, run a command.</b><br>
+  <b>App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command.</b><br>
   The app launcher. A tool for <a href="https://github.com/Theyashsawarkar/vyom">Vyom</a>, keyboard-driven panels for Wayland.
 </p>
 
@@ -24,13 +24,13 @@
   <a href="https://github.com/Theyashsawarkar/dvara/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Theyashsawarkar/dvara/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://github.com/Theyashsawarkar/dvara/releases"><img alt="Release" src="https://img.shields.io/github/v/release/Theyashsawarkar/dvara?color=cba6f7&label=release"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-f5e0dc"></a>
-  <a href="https://github.com/Theyashsawarkar/vyom"><img alt="Vyom 0.2.5+" src="https://img.shields.io/badge/vyom-0.2.5%2B-89b4fa"></a>
+  <a href="https://github.com/Theyashsawarkar/vyom"><img alt="Vyom 0.6.0+" src="https://img.shields.io/badge/vyom-0.6.0%2B-89b4fa"></a>
   <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-a6e3a1">
   <img alt="Wayland" src="https://img.shields.io/badge/wayland-layer--shell-94e2d5">
 </p>
 
 <p align="center">
-  <img alt="dvara: apps panel" src="assets/screenshots/dvara.png" width="100%">
+  <img alt="dvara: searching fir, with the matched letters of Firefox, Firewall and Refinery highlighted, Firefox marked Running · 2 windows, a Run as a command row, and the preview with Switch to it, its two windows and workspaces, and its actions on Alt+1 and Alt+2" src="assets/screenshots/dvara.png" width="100%">
 </p>
 
 > *Dvara* (द्वार) is Sanskrit for "gateway": the doorway every app is opened through.
@@ -51,9 +51,10 @@ dvara is the app launcher for [Vyom](https://github.com/Theyashsawarkar/vyom): o
 ## Features
 
 - Every installed app (.desktop files), with its real icon.
-- Ranked by **how often and how recently you open each app**; with an empty search, your frequent apps come first, then everything A–Z.
-- Matches the name, the generic name ("Web browser"), keywords and the command, typos and all.
-- The preview shows what the app is, **how many of its windows are already open**, and its own actions (New window, Private window…), each on `Alt+1..9`.
+- Ranked by **how often and how recently you open each app**. With an empty search, **a dock of your 8 most-used apps** as big icons sits above the list (`1..8` opens one), then what's running, then everything A–Z.
+- Matches the name, the generic name ("Web browser"), keywords and the command, typos and all; **the letters that matched are highlighted** in peach, so you can see why "frf" found Firefox.
+- **Running apps say so** ("Running · 2 windows", in green) and `Enter` switches to them instead of opening another (on sway and i3); `Ctrl+Enter` opens a new window.
+- The preview shows the app's **open windows with their workspace** (click one to switch to it), how often you've opened it, and its own actions (New window, Private window…) as buttons, each on `Alt+1..9`.
 - `Shift+Enter` runs whatever you typed as a command in a terminal; a row below the results runs it without one.
 - Keyboard first: every action has a key, shown in the footer; the mouse works too.
 - Never freezes the panel: slow commands run in the background.
@@ -62,7 +63,7 @@ dvara is the app launcher for [Vyom](https://github.com/Theyashsawarkar/vyom): o
 
 ### Requirements
 
-- [Vyom](https://github.com/Theyashsawarkar/vyom) 0.2.5 or newer (Python 3.11+, PyGObject, GTK 4, [gtk4-layer-shell](https://github.com/wmww/gtk4-layer-shell), a Nerd Font)
+- [Vyom](https://github.com/Theyashsawarkar/vyom) 0.6.0 or newer (Python 3.11+, PyGObject, GTK 4, [gtk4-layer-shell](https://github.com/wmww/gtk4-layer-shell), a Nerd Font)
 - optional: swaymsg (open-window counts)
 
 ### Install
@@ -92,10 +93,11 @@ Open it with `vyom dvara` (or your key). Type to search; the footer always shows
 
 | Key | Action |
 |---|---|
-| `Enter` | Open the selected app |
-| `Ctrl+Enter` | Run the selected app's first action (e.g. a new window) |
+| `Enter` | Open the selected app (switches to it when it's already running) |
+| `Ctrl+Enter` | Open a new window of the selected app |
 | `Shift+Enter` | Run what you typed as a command (in a terminal) |
 | `Alt+1..9` | Run that numbered action of the selected app |
+| `1..8` | Open that app from the dock (empty search box only; not when an app's name starts with that digit) |
 | `Esc` | Close the panel |
 
 Every Vyom panel also has `Up`/`Down` (or `Ctrl+K`/`Ctrl+J`) to move and `Page Up`/`Page Down` to jump. Each tool opens from its own key.
