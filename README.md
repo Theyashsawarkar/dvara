@@ -51,7 +51,7 @@ dvara is the app launcher for [Vyom](https://github.com/Theyashsawarkar/vyom): o
 ## Features
 
 - Every installed app (.desktop files), with its real icon.
-- Ranked by **how often and how recently you open each app**. With an empty search, **a dock of your 8 most-used apps** as big icons sits above the list (`1..8` opens one), then what's running, then everything A–Z.
+- Ranked by **how often and how recently you open each app**. With an empty search, **a dock of your 8 most-used apps** as big icons sits above the list (`1..8` opens one, left to right; a green dot marks a running one), then what's running, then everything A–Z.
 - Matches the name, the generic name ("Web browser"), keywords and the command, typos and all; **the letters that matched are highlighted** in peach, so you can see why "frf" found Firefox.
 - **Running apps say so** ("Running · 2 windows", in green) and `Enter` switches to them instead of opening another (on sway and i3); `Ctrl+Enter` opens a new window.
 - The preview shows the app's **open windows with their workspace** (click one to switch to it), how often you've opened it, and its own actions (New window, Private window…) as buttons, each on `Alt+1..9`.

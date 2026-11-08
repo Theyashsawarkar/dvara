@@ -2,6 +2,11 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.2.1 -- 2026-11-08
+
+- The dock shows icons and names only, no number keys under them (`1..8` still opens one,
+  left to right; the tooltip says which); a running app keeps its green dot.
+
 ## v0.2.0 -- 2026-11-07
 
 - **A dock of your 8 most-used apps** as big icons above the list when the search box is empty; `1..8`

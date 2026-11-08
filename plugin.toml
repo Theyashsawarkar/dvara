@@ -1,8 +1,8 @@
 name = "dvara"
 title = "Apps"
 description = "App launcher: a dock of your most-used apps, matched letters highlighted, switch to running apps, app actions, run a command."
-version = "0.2.0"
-vyom = "0.6.0"
+version = "0.2.1"
+vyom = "0.6.3"
 icon = "󰀻"
 color = "blue"
 requires = []

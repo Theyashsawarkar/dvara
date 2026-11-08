@@ -263,11 +263,8 @@ class Plugin(Base):
                 icon.set_pixel_size(40)
             inner.append(icon)
             inner.append(ui.label(app.name, "dock-name", ellipsize=Pango.EllipsizeMode.END, max_width_chars=7))
-            num = ui.label(str(i), "keycap", halign=Gtk.Align.CENTER)
-            if self.windows_of(app):
-                num = ui.hbox(num, ui.label("●", "t-green", tooltip_text="running"), spacing=4)
-                num.set_halign(Gtk.Align.CENTER)
-            inner.append(num)
+            if self.windows_of(app):   # a green dot: it's running
+                inner.append(ui.label("●", "t-green", halign=Gtk.Align.CENTER, tooltip_text="running"))
             b.set_child(inner)
             b.connect("clicked", lambda _b, a=app: self.open_app(a))
             bar.append(b)
