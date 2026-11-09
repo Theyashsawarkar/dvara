@@ -29,11 +29,26 @@ except (ValueError, ImportError):
 from vyom import Hint, Row, Section, ui, util
 from vyom import Plugin as Base
 
-# keybind: Vyom/apps | Enter | Open the selected app (switches to it when it's already running)
-# keybind: Vyom/apps | Ctrl+Enter | Open a new window of the selected app
-# keybind: Vyom/apps | Shift+Enter | Run what you typed as a command (in a terminal)
-# keybind: Vyom/apps | Alt+1..9 | Run that numbered action of the selected app
-# keybind: Vyom/apps | 1..8 | Open that app from the dock (empty search box only)
+from . import vim
+
+# KEYBINDS (generated from dvara/vim.py by scripts/keybinds.py; don't edit by hand)
+# keybind: Vyom/dvara:insert | Enter | Open the selected app (switches to it when it's already running)
+# keybind: Vyom/dvara:insert | Ctrl+Enter | Open a new window of the selected app
+# keybind: Vyom/dvara:insert | Shift+Enter | Run what you typed as a command (in a terminal)
+# keybind: Vyom/dvara:insert | 1..8 | Open that app from the dock (empty search box only; not when an app's name starts with that digit)
+# keybind: Vyom/dvara:normal | Enter | Open the selected app (switches to it when it's already running)
+# keybind: Vyom/dvara:normal | o | Open the selected app (switches to it when it's already running)
+# keybind: Vyom/dvara:normal | O | Open a new window of the selected app
+# keybind: Vyom/dvara | Alt+1..9 | Run that numbered action of the selected app
+# keybind: Vyom/dvara leader:normal | Space b 1..8 | Open that app from the dock
+# keybind: Vyom/dvara leader:normal | Space x 1..9 | Run that numbered action of the selected app
+# keybind: Vyom/dvara leader:normal | Space o t | Run what you typed as a command in a terminal
+# keybind: Vyom/dvara leader:normal | Space o e | Open the selected app's .desktop file in $EDITOR
+# keybind: Vyom/dvara leader:normal | Space y n | Copy the selected app's name
+# keybind: Vyom/dvara leader:normal | Space y c | Copy the selected app's command
+# keybind: Vyom/dvara leader:normal | Space d d | Forget the selected app's usage (it leaves the dock; asks first)
+# keybind: Vyom/dvara leader:normal | Space r | Rescan the installed apps
+# END KEYBINDS
 
 STATE = "dvara-usage"
 DOCK = 8
@@ -165,8 +180,13 @@ class Plugin(Base):
     placeholder = "Search apps…   (Shift+Enter runs what you type)"
     preview = True
     preview_width = 340
-    hints = [Hint("Enter", "open / switch"), Hint("Ctrl+Enter", "new window"), Hint("Alt+1..9", "action"),
-             Hint("Shift+Enter", "run command")]
+    hints = [Hint("Enter", "open / switch"), Hint("O", "new window"), Hint("Space x", "action"),
+             Hint("Space o t", "run in terminal")]
+    insert_hints = [Hint("Enter", "open"), Hint("Ctrl+Enter", "new window"), Hint("Shift+Enter", "run command"),
+                    Hint("Esc", "normal mode")]
+    modal = True                 # Vyom's vim keys (ADR 0008); dvara/vim.py
+    start_mode = "insert"        # search-first: type an app's name
+    key_groups = vim.GROUPS
 
     def __init__(self, vyom, conf):
         super().__init__(vyom, conf)
@@ -379,17 +399,96 @@ class Plugin(Base):
         self.run_command(cmd, terminal=(what == "term"))
         return False
 
+    # ================================================================ keys
+    # The modes, counts and sequences are Vyom's; dvara/vim.py is its keys.
+    def keys(self, tab):
+        return vim.keys(tab)
+
     def key(self, name, row, mods):
-        # Alt: Ctrl+1..9 switch a tool's tabs in every Vyom tool
+        # Alt+1..9 in both modes: the selected app's own actions
         if mods == {"alt"} and name.isdigit() and name != "0" and row is not None and isinstance(row.data, App):
-            i = int(name) - 1
-            if i < len(row.data.actions):
-                self.launch(row.data, row.data.actions[i][0])
+            self.run_action(row.data, int(name))
             return True
-        # 1..8 with an empty search box: the dock (unless an app's name starts with it)
-        if not mods and len(name) == 1 and name in "12345678" and self.panel and not self.panel.query() and self.dock:
-            i = int(name) - 1
-            if i < len(self.dock) and not any(a.name.startswith(name) for a in self.apps):
-                self.open_app(self.dock[i])
-                return True
+        # Insert, empty search box: 1..8 open the dock (unless an app's name starts with it)
+        if not mods and len(name) == 1 and name in "12345678" and self.vim_mode() == "insert" \
+                and self.panel and not self.panel.query() and int(name) <= len(self.dock) \
+                and not any(a.name.startswith(name) for a in self.apps):
+            self.v_dock(1, name)
+            return True
         return False
+
+    def selected_app(self):
+        row = self.panel.selected_row() if self.panel else None
+        return row.data if row is not None and isinstance(row.data, App) else None
+
+    def run_action(self, app, n):
+        if n - 1 < len(app.actions):
+            self.launch(app, app.actions[n - 1][0])
+        else:
+            self.set_status(f"{app.name} has no action {n}", kind="bad")
+
+    def v_open(self, n, arg):
+        modal = self.panel.modal
+        if modal is not None and self.panel.searching:
+            # Typed before the results arrived (a name, Esc, Enter): open what
+            # they select, not the row that was there a moment ago.
+            modal.deferred.append((vim.B("<CR>", f"open:{arg}" if arg else "open"), n))
+            return
+        row = self.panel.selected_row()
+        if row is not None:
+            self.activate(row, {"ctrl"} if arg == "new" else set())
+
+    def v_term(self, _n, _a):
+        q = self.panel.query().strip()
+        if q:
+            self.run_command(q, terminal=True)
+        else:
+            self.set_status("type a command first (i, then the command)", kind="bad")
+
+    def v_dock(self, _n, arg):
+        i = int(arg) - 1
+        if i < len(self.dock):
+            self.open_app(self.dock[i])
+        else:
+            self.set_status(f"the dock has no app {arg}", kind="bad")
+
+    def v_action(self, _n, arg):
+        app = self.selected_app()
+        if app is not None:
+            self.run_action(app, int(arg))
+
+    def v_edit(self, _n, _a):
+        app = self.selected_app()
+        path = app.info.get_filename() if app is not None and hasattr(app.info, "get_filename") else None
+        if not path:
+            self.set_status("no .desktop file for this one", kind="bad")
+            return
+        editor = os.environ.get("VISUAL") or os.environ.get("EDITOR") or "nano"
+        util.spawn([self.terminal, "-e", editor, path])
+        self.close()
+
+    def v_copy(self, _n, arg):
+        app = self.selected_app()
+        if app is None:
+            return
+        text = app.name if arg == "name" else (app.info.get_commandline() or app.exe)
+        util.copy(text)
+        self.set_status(f"copied {text}", kind="ok")
+
+    def v_forget(self, _n, _a):
+        app = self.selected_app()
+        if app is None:
+            return
+
+        def forget():
+            usage = util.load_state(STATE, {})
+            usage.pop(app.id, None)
+            util.save_state(STATE, usage)
+            self.set_status(f"forgot {app.name}'s usage", kind="ok")
+            self.refresh()
+        self.confirm(f"Forget how often you open {app.name}? It leaves the dock.", forget)
+
+    def v_rescan(self, _n, _a):
+        self.loaded = 0
+        self.refresh()
+        self.set_status("rescanned the apps", kind="ok")

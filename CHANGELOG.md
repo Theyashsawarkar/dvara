@@ -2,6 +2,15 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.3.0 -- 2026-11-09
+
+- **Vim keys** (Vyom 0.7, ADR 0008): NORMAL and INSERT modes, `Space` as the leader with a which-key strip, `?` and `Space ?` list every key, `Space Space` is a palette, counts (`5j`), `gg` / `G`, `H` / `L` for tabs. It opens in INSERT (search-first): type, then `Esc` for NORMAL. Needs Vyom 0.7.0.
+- Its keys are data (`dvara/vim.py`); `scripts/keybinds.py` writes the `# keybind:` lines and the README's key tables from them, and `--check` (CI) fails when they drift.
+- `O` opens a new window, `Space b 1..8` opens a dock app, `Space x 1..9` runs an app's own action, `Space o t` runs what you typed in a terminal, `Space o e` opens its .desktop file, `Space y n` / `Space y c` copy its name / command, `Space d d` forgets its usage (asks first), `Space r` rescans.
+- `1..8` open the dock only while typing in an empty search box (in NORMAL, digits are counts).
+- `1`..`8` in INSERT only open a dock app the dock has: past its end the digit is typed, as before.
+- `Enter` / `o` / `O` in NORMAL typed before the results arrive wait for them, so they open the app you searched for.
+
 ## v0.2.1 -- 2026-11-08
 
 - The dock shows icons and names only, no number keys under them (`1..8` still opens one,
