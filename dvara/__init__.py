@@ -155,6 +155,41 @@ def when(t):
     return "last week" if days < 14 else f"{a.day} {a.strftime('%b')}"
 
 
+def launch_in_scope(app, action, ctx):
+    """Opens app (or one of its actions) in its own systemd scope, through
+    Vyom's util.adopt when it has it (Vyom 0.7.4). Launched plainly, an app
+    stays in vyom.service's cgroup: stopping or restarting Vyom would kill
+    it, and its memory counts as Vyom's. An app started over D-Bus
+    (DBusActivatable) reports no pid; the bus starts it, outside Vyom."""
+    info = app.info
+    adopt = getattr(util, "adopt", None)
+    if adopt is None or not hasattr(info, "launch_uris_as_manager"):
+        return info.launch_action(action, ctx) if action else info.launch([], ctx)
+    if action:
+        # GIO launches an action with no pid to report: run the action's
+        # Exec as an app of its own instead (same field codes, same icon).
+        kf = GLib.KeyFile()
+        kf.load_from_file(info.get_filename(), GLib.KeyFileFlags.NONE)
+        def get(group, key):
+            try:
+                return kf.get_string(group, key)
+            except GLib.Error:
+                return None
+        exe = get("Desktop Action " + action, "Exec")
+        if not exe or get("Desktop Entry", "DBusActivatable") == "true":
+            return info.launch_action(action, ctx)
+        entry = GLib.KeyFile()
+        entry.set_string("Desktop Entry", "Type", "Application")
+        entry.set_string("Desktop Entry", "Name", app.name)
+        entry.set_string("Desktop Entry", "Exec", exe)
+        if get("Desktop Entry", "Icon"):
+            entry.set_string("Desktop Entry", "Icon", get("Desktop Entry", "Icon"))
+        info = DesktopAppInfo.new_from_keyfile(entry)
+    base = app.id[:-8] if app.id.endswith(".desktop") else app.id or app.name
+    info.launch_uris_as_manager([], ctx, GLib.SpawnFlags.SEARCH_PATH, None, None,
+                                lambda _info, pid, *_: adopt(pid, base), None)
+
+
 class App:
     def __init__(self, info):
         self.info = info
@@ -204,6 +239,16 @@ class Plugin(Base):
         if time.time() - self.loaded > 30:
             self.apps = [App(a) for a in Gio.AppInfo.get_all() if a.should_show()]
             self.loaded = time.time()
+
+    def prewarm(self):
+        """Vyom 0.7.4 calls this once while idle after it starts: the app
+        list, and every app's icon at the sizes the list (28 px), the dock
+        (40) and the preview (36) draw it, so the first Super+d doesn't
+        wait for them (a quarter of a second, more after a boot)."""
+        self.load()
+        warm = getattr(ui, "warm_icons", None)
+        if warm:
+            warm([a.icon for a in self.apps], sizes=(28, 36, 40))
 
     def opened(self, args):
         super().opened(args)
@@ -368,10 +413,7 @@ class Plugin(Base):
         self.count(app)
         ctx = Gdk.Display.get_default().get_app_launch_context()
         try:
-            if action:
-                app.info.launch_action(action, ctx)
-            else:
-                app.info.launch([], ctx)
+            launch_in_scope(app, action, ctx)
         except Exception as e:
             log.exception("couldn't launch %s (action %r)", app.name, action)
             util.notify("Couldn't open " + app.name, str(e), icon="dialog-error")

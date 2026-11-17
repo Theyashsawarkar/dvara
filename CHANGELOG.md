@@ -2,6 +2,11 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## v0.3.1 -- 2026-11-14
+
+- **Apps open in their own systemd scope** (`app-vyom-<app>-<pid>.scope`), through Vyom 0.7.4's `util.adopt`: before, an app opened here lived in `vyom.service`, so stopping or restarting Vyom killed it (a browser and all its tabs) and its memory counted as Vyom's. App actions ("New Private Window"...) too: their `Exec` runs as an app of its own, so they report a pid. An app started over D-Bus (`DBusActivatable`) is started by the bus, outside Vyom, as before. With an older Vyom, apps open as they did.
+- **The first Super+d doesn't wait for the app list or icons**: `prewarm()` (Vyom 0.7.4) loads them while Vyom is idle after it starts, every icon at the sizes the list, the dock and the preview draw it.
+
 ## v0.3.0 -- 2026-11-09
 
 - **Vim keys** (Vyom 0.7, ADR 0008): NORMAL and INSERT modes, `Space` as the leader with a which-key strip, `?` and `Space ?` list every key, `Space Space` is a palette, counts (`5j`), `gg` / `G`, `H` / `L` for tabs. It opens in INSERT (search-first): type, then `Esc` for NORMAL. Needs Vyom 0.7.0.
