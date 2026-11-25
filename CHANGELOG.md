@@ -2,6 +2,11 @@
 
 Newest first. Releases are tags (`vX.Y.Z`).
 
+## Unreleased
+
+- **Spatial look**: the dock's apps are borderless glass tiles with 20 px corners.
+- The website has Vayu's Spatial look: graphite glass, a floating navigation bar, near-white for links and the main button, and the tool's own colour only as its signature (the logo's glow, the shloka's line, the release dots). No more all-caps labels.
+
 ## v0.3.1 -- 2026-11-14
 
 - **Apps open in their own systemd scope** (`app-vyom-<app>-<pid>.scope`), through Vyom 0.7.4's `util.adopt`: before, an app opened here lived in `vyom.service`, so stopping or restarting Vyom killed it (a browser and all its tabs) and its memory counted as Vyom's. App actions ("New Private Window"...) too: their `Exec` runs as an app of its own, so they report a pid. An app started over D-Bus (`DBusActivatable`) is started by the bus, outside Vyom, as before. With an older Vyom, apps open as they did.
