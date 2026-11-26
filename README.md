@@ -30,7 +30,7 @@
 </p>
 
 <p align="center">
-  <img alt="dvara: searching fir, with the matched letters of Firefox, Firewall and Refinery highlighted, Firefox marked Running · 2 windows, a Run as a command row, and the preview with Switch to it, its two windows and workspaces, and its actions on Alt+1 and Alt+2" src="assets/screenshots/dvara.png" width="100%">
+  <img alt="dvara: searching term, kitty first, then Yazi and LibreOffice; the preview with Open (Enter) and the command it runs" src="assets/screenshots/dvara.webp" width="100%">
 </p>
 
 > *Dvara* (द्वार) is Sanskrit for "gateway": the doorway every app is opened through.
